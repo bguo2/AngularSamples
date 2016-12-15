@@ -1,0 +1,56 @@
+﻿    <!-- Theme JS files -->
+<script type="text/javascript" src="Assets/js/core/app.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/ui/ripple.min.js"></script>
+<script type="text/javascript" src="Assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+<!-- /theme JS files -->
+
+<!-- Page container -->
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Simple login form -->
+            <form ng-submit="submit()">
+                <div class="panel panel-body login-form">
+                    <div class="text-center">
+                        <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                        <h5 class="content-group">{{loginDescription}} 
+                            <small class="display-block">Enter your credentials below</small>
+                        </h5>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <input ng-model="userName" name="userName" type="text" class="form-control" placeholder="Username">
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <input ng-model="password" name="password" type="password" class="form-control" placeholder="Password">
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 position-right"></i></button>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="login_password_recover.html">Forgot password?</a>
+                    </div>
+                </div>
+        </form>
+        <!-- /simple login form -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+

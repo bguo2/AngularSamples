@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EcommerceAdmin</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/core.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/components.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/colors.min.css" rel="stylesheet" type="text/css">
+
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="Assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="Assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="Assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+
+    <!--AngularJS must be after jquery otherwise it will conflict with jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-route.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js"></script>
+
+</head>
+<body ng-app="EcommerceApp" class="navbar-bottom login-container" ng-init="disableSelectedMechant=false">
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse bg-indigo">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-users position-left"></i>
+                        {{selectedCustomer.Name}}
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-left" id="customerlist" ng-hide="disableSelectedMechant">
+                        <li ng-repeat="customer in customers"><a href="#" ng-click="customerSelection(customer.Id)">{{customer.Name}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        <i class="icon-display4"></i> <span class="visible-xs-inline-block position-right"> Go to website</span>
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-cog3"></i>
+                        <span class="visible-xs-inline-block position-right"> Options</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /main navbar -->
+
+    @RenderBody();
+
+    <!-- Footer -->
+    <div class="navbar navbar-default navbar-fixed-bottom footer">
+        <ul class="nav navbar-nav visible-xs-block">
+            <li><a class="text-center collapsed" data-toggle="collapse" data-target="#footer"><i class="icon-circle-up2"></i></a></li>
+        </ul>
+
+        <div class="navbar-collapse collapse" id="footer">
+            <div class="navbar-text">
+                &copy; 2015. Cardfree Inc.
+            </div>
+
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /footer -->
+
+    <script src="~/Scripts/PageRouting/Routing.js"></script>
+    <script src="~/Scripts/PageControllers/Controllers.js"></script>
+    
+</body>
+</html>

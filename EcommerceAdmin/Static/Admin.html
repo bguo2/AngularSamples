@@ -1,0 +1,165 @@
+﻿<!-- Theme JS files -->
+<script type="text/javascript" src="Assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/form_select2.js"></script>
+<script type="text/javascript" src="Assets/js/pages/components_modals.js"></script>
+
+<script type="text/javascript" src="Assets/js/core/libraries/jasny_bootstrap.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/styling/uniform.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/inputs/autosize.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/inputs/formatter.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/inputs/typeahead/handlebars.min.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/inputs/passy.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/forms/inputs/maxlength.min.js"></script>
+<script type="text/javascript" src="Assets/js/pages/form_controls_extended.js"></script>
+
+<script type="text/javascript" src="Assets/js/core/app.js"></script>
+<script type="text/javascript" src="Assets/js/plugins/ui/ripple.min.js"></script>
+<!-- /theme JS files -->
+
+<!-- Page container -->
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+        
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Single row selection -->
+            <div class="panel panel-flat">
+                <div class="row panel-body">
+                    <div class="col-lg-10">
+                        <h6 class="panel-title text-semibold">Category</h6>
+                        <div class="input-group">
+                            <select class="select-search"
+                                    ng-model="selectedCategory"
+                                    ng-options="category as category.Name for category in categories"
+                                    ng-change="categoryChange()">
+                            </select>
+                            <span class="input-group-btn" style="padding-left:20px;">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" 
+                                        data-target="#modal_category" ng-click="manageCategory()">Manage</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel-body">
+                    <div class="col-lg-10">
+                        <h6 class="panel-title text-semibold">Products
+                        <a style="margin-left:15px;" class="btn btn-primary btn-icon btn-rounded" data-toggle="modal" 
+                           data-target="#modal_product" ng-click="manageProducts()">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </a>
+                        </h6>
+                        
+                    </div>
+                </div>
+
+                <span id="prodTable"></span>
+
+                <!--Category dialog-->
+                <div id="modal_category" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-sm">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h5 class="modal-title">Category Management</h5>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="#" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="text" placeholder="category name" class="form-control" ng-model="categoryNameInput">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <select name="select" size="10" class="form-control"
+                                                    ng-model="dlgSelectedCategory"
+                                                    ng-options="category as category.Name for category in dlgCategories"
+                                                    ng-change="dlgCategoryChange()">
+                                            </select>
+                                        </div>
+                                    </div>                                
+                                </form>
+                            </div>
+
+                            <div class="modal-footer center">
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn-default btn-sm" ng-click="dlgCategoryAdd()">&nbsp;&nbsp;Add&nbsp;&nbsp;</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn-default btn-sm" ng-click="dlgCategoryModify()">Modify</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn-default btn-sm" ng-click="dlgCategoryDelete()">Delete</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn-default btn-sm" data-dismiss="modal" ng-click="dlgCategorySubmit()">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Product dialog-->
+                <div id="modal_product" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-sm">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h5 class="modal-title">{{dlgProductTitle}}</h5>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="#" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="hidden" ng-model="dlgProduct.Id" />
+                                            <input type="text" placeholder="product name" class="form-control" ng-model="dlgProduct.Name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="description" class="form-control" ng-model="dlgProduct.Description" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Price:</label>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Enter amount" ng-model="dlgProduct.Prices[0]"/>
+                                                <span class="help-block">small size price</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Enter amount" ng-model="dlgProduct.Prices[1]"/>
+                                                <span class="help-block">medium size price</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Enter amount" ng-model="dlgProduct.Prices[2]"/>
+                                                <span class="help-block">large size price</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="modal-footer center">
+                                <button type="submit" class="btn-default btn-sm" data-dismiss="modal" ng-click="dlgProductSubmit()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /single row selection -->
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+
